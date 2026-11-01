@@ -1,7 +1,7 @@
 # Use the official .NET image as a build environment 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
- 
+
 # Copy the csproj and restore as distinct layers
 COPY *.csproj ./
 RUN dotnet restore
