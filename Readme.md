@@ -18,4 +18,9 @@ df -i /
 df -hT /tmp
 df -hT "$HOME"
 
+If /tmp directory is out of space remount extry spece on that Because /tm is bydefault mounted on /tmpfs file system
+which uses RAM as memory so to you need to increse its space.
+
+sudo mount -o remount,size=2G /tmp
+
 ```
