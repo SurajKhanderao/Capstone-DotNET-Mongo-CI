@@ -11,4 +11,11 @@ source ~/.bashrc
 
 dotnet --list-sdks
 
+
+verify space
+------
+df -i /
+df -hT /tmp
+df -hT "$HOME"
+
 ```
