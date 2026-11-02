@@ -1,14 +1,12 @@
+
 using NoteApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Vault file path
-string vaultConnStrPath = "/vault/secrets/mongodb__connectionstring";
-
-
-string connectionString = File.Exists(vaultConnStrPath)
-    ? File.ReadAllText(vaultConnStrPath).Trim()
-    : throw new FileNotFoundException($"❌ ERROR: Vault secret file not found at {vaultConnStrPath}");
+// Read MongoDB connection string from appsettings.json or environment variable
+string connectionString =
+    builder.Configuration["MongoDB:ConnectionString"]
+    ?? throw new Exception("MongoDB connection string is missing!");
 
 builder.Services.Configure<DatabaseSettings>(options =>
 {
@@ -29,7 +27,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Notes}/{action=Index}/{id?}");
 
-Console.WriteLine("✅ NoteApp running on http://0.0.0.0:5050");
+Console.WriteLine("NoteApp running on http://0.0.0.0:5050");
 
 app.Run("http://0.0.0.0:5050");
-
